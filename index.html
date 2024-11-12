@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./style.css"/>
+
+</head>
+<body>
+
+    <div class="endGame">
+        <button onclick="endGame()">Encerrar partida</button>
+    </div>
+    <h1>Jogo Turma Serasa</h1>
+
+    <div id="gameSettings">
+        <p>Selecione a quantidade de jogadores:</p>
+
+        <div class="playerCountButton">
+            <button onclick="startGame(3)">3</button>
+            <button onclick="startGame(4)">4</button>
+            <button onclick="startGame(5)">5</button>
+            <button onclick="startGame(6)">6</button>
+        </div>
+
+    </div>
+
+    <div id="gameContent">
+
+        <div class="playerContent">
+            
+            <input class="inputPlayerName" value="Jogador 1" maxlength="22" />
+            <input class="inputCredit" type="number" value="1500"/>
+
+            <div class="creditWarningContent">
+                <p>
+                    Advertências de crédito:
+                    <span class="creditWarningValues">⚪⚪⚪</span>
+                </p>
+                <div class="creditWarningButtons">
+                    <button onclick="addWarning(true, 0)">+</button>
+                    <button onclick="addWarning(false, 0)">-</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="playerContent">
+            
+            <input class="inputPlayerName" value="Jogador 1" maxlength="22" />
+            <input class="inputCredit" type="number" value="1500"/>
+
+            <div class="creditWarningContent">
+                <p>
+                    Advertências de crédito:
+                    <span class="creditWarningValues">⚪⚪⚪</span>
+                </p>
+                <div class="creditWarningButtons">
+                    <button onclick="addWarning(true, 1)">+</button>
+                    <button onclick="addWarning(false, 1)">-</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="playerContent">
+            
+            <input class="inputPlayerName" value="Jogador 1" maxlength="22" />
+            <input class="inputCredit" type="number" value="1500"/>
+
+            <div class="creditWarningContent">
+                <p>
+                    Advertências de crédito:
+                    <span class="creditWarningValues">⚪⚪⚪</span>
+                </p>
+                <div class="creditWarningButtons">
+                    <button onclick="addWarning(true, 2)">+</button>
+                    <button onclick="addWarning(false, 2)">-</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="playerContent">
+            
+            <input class="inputPlayerName" value="Jogador 1" maxlength="22" />
+            <input class="inputCredit" type="number" value="1500"/>
+
+            <div class="creditWarningContent">
+                <p>
+                    Advertências de crédito:
+                    <span class="creditWarningValues">⚪⚪⚪</span>
+                </p>
+                <div class="creditWarningButtons">
+                    <button onclick="addWarning(true, 3)">+</button>
+                    <button onclick="addWarning(false, 3)">-</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="playerContent">
+            
+            <input class="inputPlayerName" value="Jogador 1" maxlength="22" />
+            <input class="inputCredit" type="number" value="1500"/>
+
+            <div class="creditWarningContent">
+                <p>
+                    Advertências de crédito:
+                    <span class="creditWarningValues">⚪⚪⚪</span>
+                </p>
+                <div class="creditWarningButtons">
+                    <button onclick="addWarning(true, 4)">+</button>
+                    <button onclick="addWarning(false, 4)">-</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="playerContent">
+            
+            <input class="inputPlayerName" value="Jogador 1" maxlength="22" />
+            <input class="inputCredit" type="number" value="1500"/>
+
+            <div class="creditWarningContent">
+                <p>
+                    Advertências de crédito:
+                    <span class="creditWarningValues">⚪⚪⚪</span>
+                </p>
+                <div class="creditWarningButtons">
+                    <button onclick="addWarning(true, 5)">+</button>
+                    <button onclick="addWarning(false, 5)">-</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="marginAbsolute"></div>
+
+        <div class="bankerContent bankerAdd">
+            <div class="bankerOptions ">
+
+                <div class="operationButton">
+                    <button class="operationButtonAdd selectedAdd" onclick="operationHandle(true)">Adicionar</button>
+                    <button class="operationButtonSub" onclick="operationHandle(false)">Subtrair</button>
+                </div>
+
+                <div class="creditValues">    
+                    <p><span class="operationLabel">Adicionar</span> crédito de <strong><span class="creditPlayerName"></span></strong></p>
+                    <div class="valuesButton">
+                        <button onclick="addValue(10)">10</button>
+                        <button onclick="addValue(25)">25</button>
+                        <button onclick="addValue(50)">50</button>
+                        <button onclick="addValue(100)">100</button>
+                        <button onclick="addValue(1000)">1.000</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>
+
+
