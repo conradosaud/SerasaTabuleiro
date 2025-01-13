@@ -32,7 +32,12 @@
         <div class="playerContent">
             
             <input class="inputPlayerName" value="Jogador 1" maxlength="22" />
-            <input class="inputCredit" type="number" value="1500"/>
+            <br/>
+            <label>
+                <span class="inputLabel">Crédito</span>
+                <br/>
+                <input class="inputCredit" type="number" value="1500"/>
+            </label>
 
             <div class="creditWarningContent">
                 <p>
@@ -43,6 +48,16 @@
                     <button onclick="addWarning(true, 0)">+</button>
                     <button onclick="addWarning(false, 0)">-</button>
                 </div>
+            </div>
+
+            
+            <div class="investimentContent">
+                <label>
+                    <span class="inputLabel">Investimentos</span>
+                    <br/>
+                    <input class="inputInvestiment" type="number" value="1500"/>
+                </label>
+                <button onclick="addIncome(0)">Receber Rendimentos</button>
             </div>
 
         </div>
@@ -63,6 +78,15 @@
                 </div>
             </div>
 
+            <div class="investimentContent">
+                <label>
+                    <span class="inputLabel">Investimentos</span>
+                    <br/>
+                    <input class="inputInvestiment" type="number" value="1500"/>
+                </label>
+                <button onclick="addIncome(1)">Receber Rendimentos</button>
+            </div>
+
         </div>
 
         <div class="playerContent">
@@ -79,6 +103,15 @@
                     <button onclick="addWarning(true, 2)">+</button>
                     <button onclick="addWarning(false, 2)">-</button>
                 </div>
+            </div>
+
+            <div class="investimentContent">
+                <label>
+                    <span class="inputLabel">Investimentos</span>
+                    <br/>
+                    <input class="inputInvestiment" type="number" value="1500"/>
+                </label>
+                <button onclick="addIncome(2)">Receber Rendimentos</button>
             </div>
 
         </div>
@@ -99,6 +132,15 @@
                 </div>
             </div>
 
+            <div class="investimentContent">
+                <label>
+                    <span class="inputLabel">Investimentos</span>
+                    <br/>
+                    <input class="inputInvestiment" type="number" value="1500"/>
+                </label>
+                <button onclick="addIncome(3)">Receber Rendimentos</button>
+            </div>
+
         </div>
 
         <div class="playerContent">
@@ -115,6 +157,15 @@
                     <button onclick="addWarning(true, 4)">+</button>
                     <button onclick="addWarning(false, 4)">-</button>
                 </div>
+            </div>
+
+            <div class="investimentContent">
+                <label>
+                    <span class="inputLabel">Investimentos</span>
+                    <br/>
+                    <input class="inputInvestiment" type="number" value="1500"/>
+                </label>
+                <button onclick="addIncome(4)">Receber Rendimentos</button>
             </div>
 
         </div>
@@ -135,6 +186,15 @@
                 </div>
             </div>
 
+            <div class="investimentContent">
+                <label>
+                    <span class="inputLabel">Investimentos</span>
+                    <br/>
+                    <input class="inputInvestiment" type="number" value="1500"/>
+                </label>
+                <button onclick="addIncome(5)">Receber Rendimentos</button>
+            </div>
+
         </div>
 
         <div class="marginAbsolute"></div>
@@ -148,7 +208,7 @@
                 </div>
 
                 <div class="creditValues">    
-                    <p><span class="operationLabel">Adicionar</span> crédito de <strong><span class="creditPlayerName"></span></strong></p>
+                    <p><span class="operationLabel">Adicionar</span> <u><span class="operationTypeLabel">crédito</span></u> de <strong><span class="creditPlayerName"></span></strong></p>
                     <div class="valuesButton">
                         <button onclick="addValue(10)">10</button>
                         <button onclick="addValue(25)">25</button>

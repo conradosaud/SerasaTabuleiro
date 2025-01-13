@@ -1,14 +1,21 @@
 
 let players = [
-    { name: "Jogador 1", credit: 1500, warnings: 0, isPlaying: false },
-    { name: "Jogador 2", credit: 1500, warnings: 0, isPlaying: false },
-    { name: "Jogador 3", credit: 1500, warnings: 0, isPlaying: false },
-    { name: "Jogador 4", credit: 1500, warnings: 0, isPlaying: false },
-    { name: "Jogador 5", credit: 1500, warnings: 0, isPlaying: false },
-    { name: "Jogador 6", credit: 1500, warnings: 0, isPlaying: false },
+    { name: "Jogador 1", credit: 0, investiment: 0, warnings: 0, isPlaying: false },
+    { name: "Jogador 2", credit: 0, investiment: 0, warnings: 0, isPlaying: false },
+    { name: "Jogador 3", credit: 0, investiment: 0, warnings: 0, isPlaying: false },
+    { name: "Jogador 4", credit: 0, investiment: 0, warnings: 0, isPlaying: false },
+    { name: "Jogador 5", credit: 0, investiment: 0, warnings: 0, isPlaying: false },
+    { name: "Jogador 6", credit: 0, investiment: 0, warnings: 0, isPlaying: false },
 ]
 let isAdd = true;
 let selectedPlayer = 0;
+
+let isCreditSelected = false;
+
+const fees = 0.10;
+const income = 0.25;
+
+let isLoading = false;
 
 function start(){
 
@@ -31,6 +38,7 @@ function start(){
             });
 
         });
+        
 
     }else{
         document.querySelector("#gameContent").style.display = "none";
@@ -93,15 +101,31 @@ function addValue( value ){
     
     value = isAdd ? value : -value;
     value = parseInt(value);
-    console.log(value)
-    console.log(players[selectedPlayer].credit)
-    players[selectedPlayer].credit += value;
-    document.querySelectorAll(".inputCredit")[selectedPlayer].value = parseInt( players[selectedPlayer].credit );
+    if( isCreditSelected ){
+        players[selectedPlayer].credit += value;
+        document.querySelectorAll(".inputCredit")[selectedPlayer].value = parseInt( players[selectedPlayer].credit );
+    }else{
+        players[selectedPlayer].investiment += value;
+        document.querySelectorAll(".inputInvestiment")[selectedPlayer].value = parseInt( players[selectedPlayer].investiment );
+    }
 
     saveLocalStorage();
 }
 
+function addIncome(playerIndex){
+    let before = players[playerIndex].investiment;
+    players[playerIndex].investiment += parseInt( players[playerIndex].investiment * income );
+    let after = players[playerIndex].investiment;
+    document.querySelectorAll(".inputInvestiment")[selectedPlayer].value = parseInt( players[selectedPlayer].investiment );
+
+    alert("Rendimentos de 25% aplicado à ["+players[playerIndex].name+"]!\nSaldo anterior: "+before+"\nSaldo atual: "+after+"\n\nGanho total: "+(after-before))
+
+}
+
 function addWarning( add, player ){
+
+    isCreditSelected = true;
+    document.querySelector(".operationTypeLabel").innerHTML = "crédito";
 
     if(player != selectedPlayer)
         selectedPlayer = player;
@@ -114,15 +138,41 @@ function addWarning( add, player ){
     if( players[player].warnings <= 0 )
         players[player].warnings = 0
 
-    let string = "⚪⚪⚪";
-    if(players[player].warnings == 1)
-        string = "🔴⚪⚪";
-    if(players[player].warnings == 2)
-        string = "🔴🔴⚪";
-    if(players[player].warnings == 3)
-        string = "🔴🔴🔴";
+    let before = players[player].credit;
+    let feesText = 10;
 
+    let newValue = 0;
+    let string = "⚪⚪⚪";
+    if(players[player].warnings == 1){
+        string = "🔴⚪⚪";
+        if( add ){
+            newValue = players[player].credit * fees * 1;
+            feesText = 10;
+        }
+    }
+    if(players[player].warnings == 2){
+        string = "🔴🔴⚪";
+        if( add ){
+            newValue += players[player].credit * fees * 2;
+            feesText = 20;
+        }
+    }
+    if(players[player].warnings == 3){
+        string = "🔴🔴🔴";
+        if( add ){
+            newValue += players[player].credit * fees * 3;
+            feesText = 30;
+        }
+    }
+
+    let after =  players[player].credit + parseInt(newValue);
+    
     document.querySelectorAll(".creditWarningValues")[player].innerHTML = string;
+
+    if( add && !isLoading )
+        alert("Juros de "+feesText+"% aplicado ao crédito de ["+players[player].name+"]!\n Crédito anterior: "+before+"\nCrédito atual: "+after+"\n\nAcréscimos total: "+(after-before))
+
+    addValue(newValue);
 
     saveLocalStorage();
 }
@@ -141,10 +191,14 @@ function loadLocalStorage(){
 
 function initializeListenners(){
     try{
+        isLoading = true;
+        setSelectedInputOnClick();
         addSelectOnClick();
         setCreditOnBlur();
+        setInvestimentOnBlur();
         setPlayerNameOnBlur();
         loadPlayerValues();
+        isLoading = false;
     }catch(e){
         console.log("loading...")
     }
@@ -160,6 +214,21 @@ function addSelectOnClick(){
         })
     });
 }
+function setSelectedInputOnClick(){
+    document.querySelectorAll(".inputCredit").forEach( e => {
+        e.addEventListener("click", ()=> {
+            isCreditSelected = true;
+            document.querySelector(".operationTypeLabel").innerHTML = "crédito";
+        })
+    });
+    document.querySelectorAll(".inputInvestiment").forEach( e => {
+        e.addEventListener("click", ()=> {
+            isCreditSelected = false;
+            document.querySelector(".operationTypeLabel").innerHTML = "investimento";
+        })
+    });
+}
+
 function setCreditOnBlur(){    
     // Set credit value on blur
     document.querySelectorAll(".inputCredit").forEach( (e, index) => {
@@ -167,6 +236,17 @@ function setCreditOnBlur(){
             if(isNaN(e.value) == false)
                 players[index].credit = parseInt( e.value );
             e.value = players[index].credit
+            saveLocalStorage();
+        })
+    });
+}
+function setInvestimentOnBlur(){    
+    // Set investiment value on blur
+    document.querySelectorAll(".inputInvestiment").forEach( (e, index) => {
+        e.addEventListener("blur", ()=> {
+            if(isNaN(e.value) == false)
+                players[index].investiment = parseInt( e.value );
+            e.value = players[index].investiment
             saveLocalStorage();
         })
     });
@@ -185,6 +265,10 @@ function loadPlayerValues(){
     // Add credit to player on load
     document.querySelectorAll(".inputCredit").forEach( (e, index) => {
         e.value = players[index].credit
+    });
+    // Add investiment to player on load
+    document.querySelectorAll(".inputInvestiment").forEach( (e, index) => {
+        e.value = players[index].investiment
     });
 
     players.forEach((element, index) => {
